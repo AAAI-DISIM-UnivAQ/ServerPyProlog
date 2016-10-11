@@ -4,7 +4,7 @@ Python library that works as a bridge to exchange data between Python programs (
 ```python
     # PAY ATTENTION ON THE PATH AND THE NAME YOU CHOOSE FOR YOUR LISTS AND WRITE JSON STRINGS CORRECTLY !!!!!!
 
-    from ServerPyProlog.py import serverPyProlog
+    import ServerPyProlog as SPP
 
     json = '{"nome":"felix","cognome":"domesticus"}' #A JSON string (it could be a normal JSON too)
 
@@ -13,7 +13,7 @@ Python library that works as a bridge to exchange data between Python programs (
        "cognome":"salutari"
     }
 
-    translator=serverPyProlog()     #Creation of a serverPyProlog object
+    translator = SPP.ServerPyProlog()     #Creation of a serverPyProlog object
     translator.delResult()    #Delete old results collected by serverPyProlog in self.result. Use ADDtoResult(string)
                        #to add a Prolog string to add to result.
     translator.JSONtoPmap(json, "gatto")   #Convert JSONs or JSON strings to Prolog maps. In this case, "gatto" is the name of the map
