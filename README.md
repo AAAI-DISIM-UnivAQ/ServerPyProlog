@@ -20,7 +20,9 @@ Python library that works as a bridge to exchange data between Python programs (
     translator.VALUEStoPlist(["0",2,3], "numbers")  #Convert an array to a Prolog list (in this case, the list is called numbers)
     translator.DICTIONARYtoPmap(persona, "persona") #Convert dictionaries to Prolog maps.
     translator.RESULTtoTXT(fileName,path, false)  #Write on a text document without overwriting it.
-    translator.notificationTXT($txt_name, $path)   #Create a "notification" text file in the specified path.
+    txt_name = 'my.txt'
+    path = 'mypath/'
+    translator.notificationTXT(txt_name, path)   #Create a "notification" text file in the specified path.
     result = translator.getResult() #It gives back the result (that is a string containing Prolog).
     print(result)
 ```
