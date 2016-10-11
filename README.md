@@ -1,6 +1,7 @@
 # ServerPyProlog
 Python library that works as a bridge to exchange data between Python programs (or servers) and Prolog programs or Prolog based agents.
 
+```python
     # PAY ATTENTION ON THE PATH AND THE NAME YOU CHOOSE FOR YOUR LISTS AND WRITE JSON STRINGS CORRECTLY !!!!!!
 
     from ServerPyProlog.py import serverPyProlog
@@ -22,3 +23,4 @@ Python library that works as a bridge to exchange data between Python programs (
     translator.notificationTXT($txt_name, $path)   #Create a "notification" text file in the specified path.
     result = translator.getResult() #It gives back the result (that is a string containing Prolog).
     print(result)
+```
