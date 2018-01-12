@@ -1,3 +1,17 @@
+
+'''
+Copyright 2016-2018 Agnese Salutari.
+Licensed under the Apache License, Version 2.0 (the "License"); 
+you may not use this file except in compliance with the License. 
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on 
+an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+See the License for the specific language governing permissions and limitations under the License
+'''
+
 __author__ = 'Agnese'
 
 import re
@@ -9,6 +23,14 @@ class ServerPyProlog:
 
     def __init__(self):
         self.result = "" #risultato, stato attuale della conversione
+        path = sys.path[0]
+        self.root = path[:path.rfind('DALI')]
+        #print(path)
+        #print (self.root)
+
+    def findRoot(self):
+        #restituisce il path di root
+        return self.root
 
     def addToResult(self,string): 
         #aggiunge una stringa al risultato
@@ -31,35 +53,45 @@ class ServerPyProlog:
             file = open(path, "w")
         file.close()
 
-    def RESULTtoPL(self,plName,path,newFile): 
-        #scrive result su un file Prolog, sovrascrivendo o meno in base al valore del booleano newFile
-        path = path + os.sep + plName + ".pl"
+    def RESULTtoPL(self, fileName, path, replace):
+        # Scrive il risultato su un file Prolog.
+        # Se replace è true, cancella un eventuale file precedente con lo stesso nome nel path dato,
+        # altrimenti aggiunge result a questo file.
+        if path is '':
+            destinazione = fileName+'.pl'
+        else:
+            destinazione = path+os.sep+fileName+".pl"
         handle = False
-        if newFile is False:
-            while handle is False:
-                file = open(path, "a+")
+        if replace is False:
+            while (handle is False):
+                handle = open(destinazione, 'a')
                 time.sleep(0.1)
         else:
             while handle is False:
-                file = open(path, "w")
+                handle = open(destinazione, 'w')
                 time.sleep(0.1)
-        file.write(os.linesep + self.getResult())
-        file.close()
+        handle.write(os.linesep+self.getResult())
+        handle.close()
 
-    def RESULTtoTXT(self,txtName,path,newFile): 
-        #scrive result su un file di testo, sovrascrivendo o meno in base al valore del booleano newFile
-        path = path + os.sep + txtName + ".txt"
-        handle=False
-        if newFile is False:
-            while handle is False:
-                file = open(path,"a")
+    def RESULTtoTXT(self, fileName, path, replace):
+        # Scrive il risultato su un file Prolog.
+        # Se replace è true, cancella un eventuale file precedente con lo stesso nome nel path dato,
+        # altrimenti aggiunge result a questo file.
+        if path is '':
+            destinazione = fileName+'.txt'
+        else:
+            destinazione = path+os.sep+fileName+".txt"
+        handle = False
+        if replace is False:
+            while (handle is False):
+                handle = open(destinazione, 'a')
                 time.sleep(0.1)
         else:
             while handle is False:
-                file = open(path,"w")
+                handle = open(destinazione, 'w')
                 time.sleep(0.1)
-        file.write(os.linesep + self.getResult())
-        file.close()
+        handle.write(os.linesep+self.getResult())
+        handle.close()
 
     def cleanName(self,string): 
         # "pulisce" una stringa da trasformare in nome Prolog da caratteri non contemplati 
